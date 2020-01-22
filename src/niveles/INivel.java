@@ -1,5 +1,7 @@
 package niveles;
 
+import java.awt.Graphics;
+
 import Principal.PanelJuego;
 
 public interface INivel {

@@ -33,7 +33,7 @@ public class PantallaInicio implements IPantalla{
 	@Override
 	public void pintarPantalla(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, panelJuego.getWidth(), height);
+		//g.fillRect(0, 0, panelJuego.getWidth(), );
 	}
 
 }
