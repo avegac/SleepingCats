@@ -1,12 +1,15 @@
 package Principal;
 
+import java.awt.Graphics;
+import java.awt.Toolkit;
+
 import javax.swing.JPanel;
 
 import pantallas.IPantalla;
 import pantallas.PantallaInicio;
 
 /**
- * PIXEL SOULS
+ * RUSH HOUR
  * 
  * @author Alba Vega Calzado
  *
@@ -29,11 +32,22 @@ public class PanelJuego extends JPanel implements Runnable{
 		inicializarListeners();
 	}
 	
-	
+	/**
+	 * Método que se llama automáticamente
+	 */
+	@Override
+	protected void paintComponent(Graphics g) {
+		pantallaEjecución.pintarPantalla();
+	}
+		
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		while(true) {
+			repaint();
+			Toolkit.getDefaultToolkit().sync();
+			
+			pantallaEjecucion.ejecutarFrame();
+		}
 	}
 	
 	public void inicializarListeners() {
