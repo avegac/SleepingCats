@@ -3,6 +3,7 @@ package pantallas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
 import Principal.PanelJuego;
 
@@ -38,7 +39,18 @@ public class PantallaInicio implements IPantalla{
 		g.fillRect(0, 0, panelJuego.getWidth(), panelJuego.getHeight());
 		g.setFont(fuenteInicio);
 		g.setColor(colorTitulo);
-		g.drawString("RUSH HOUR", panelJuego.getWidth()/2-120, panelJuego.getHeight()/2-10);
+		g.drawString("SLEEPING CATS", panelJuego.getWidth()/2-120, panelJuego.getHeight()/2-10);
+	}
+
+	@Override
+	public void ejecutarFrame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pulsarRaton(MouseEvent e) {
+		panelJuego.setPantalla(new PantallaTutorial(panelJuego));
 	}
 
 }
