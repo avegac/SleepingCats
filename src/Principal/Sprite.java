@@ -20,29 +20,25 @@ public class Sprite {
 	protected int posY;
 	protected int ancho;
 	protected int alto;
-	protected int velX;
-	protected int velY;
 	protected BufferedImage buffer;
 	
 	
 	/**
 	 * Constructor privado para evitar repeticiÃ³n de cÃ³digo en los otros constructores.
 	 */
-	private Sprite(int posX, int posY, int ancho,int alto, int velX, int velY) {
+	private Sprite(int posX, int posY, int ancho,int alto) {
 		this.posX = posX;
 		this.posY = posY; 
 		this.ancho = ancho; 
 		this.alto = alto;
-		this.velX = velX;
-		this.velY = velY;
 	}
 	
 	/**
 	 * Inicializa el {@link Sprite} con un color.
 	 * @param color Color del sprite.
 	 */
-	public Sprite(int posX, int posY, int ancho,int alto, int velX, int velY, Color color) {
-		this(posX, posY, ancho, alto, velX, velY);
+	public Sprite(int posX, int posY, int ancho,int alto, Color color) {
+		this(posX, posY, ancho, alto);
 		pintarBuffer(color);
 	}
 	/**
@@ -50,8 +46,8 @@ public class Sprite {
 	 * Si hay varios sprites con la misma ruta, mejor evitar este constructor para evitar accesos a disco.
 	 * @param ruta Ruta de la imagen.
 	 */
-	public Sprite(int posX, int posY, int ancho,int alto, int velX, int velY, String ruta) {
-		this(posX, posY, ancho, alto, velX, velY);
+	public Sprite(int posX, int posY, int ancho,int alto, String ruta) {
+		this(posX, posY, ancho, alto);
 		pintarBuffer(ruta);
 	}
 	
@@ -60,8 +56,8 @@ public class Sprite {
 	 * @param imgConstructor
 	 * @param redimensionar Si vale verdadero es necesario redimensionar el buffer de entrada.
 	 */
-	public Sprite(int posX, int posY, int ancho,int alto, int velX, int velY, Image imgConstructor, boolean redimensionar) {
-		this(posX, posY, ancho, alto, velX, velY);
+	public Sprite(int posX, int posY, int ancho,int alto, Image imgConstructor, boolean redimensionar) {
+		this(posX, posY, ancho, alto);
 		pintarBuffer(imgConstructor, redimensionar );
 	}
 	
@@ -116,7 +112,7 @@ public class Sprite {
 	 * Actualiza la posición del Sprite para que siempre se mantega en el panelJuego.
 	 * @param panelJuego
 	 */
-	public void actualizarPosicion(PanelJuego panelJuego) {
+	/*public void actualizarPosicion(PanelJuego panelJuego) {
 		
 		if(posX+ancho >= panelJuego.getWidth()) { //Si te vas por la derecha!
 			velX= - Math.abs(velX);
@@ -135,7 +131,7 @@ public class Sprite {
 		
 		posX = posX+velX;
 		posY = posY+velY;
-	}
+	}*/
 	
 	/**
 	 * Comprueba si hay colisión entre este Sprite y otro que viene por parámetros.
@@ -163,33 +159,8 @@ public class Sprite {
 		g.drawImage(buffer, posX, posY, null);
 	}
 
-	/**
-	 * Actualiza la posición teniendo en cuenta la velocidad.
-	 * No tiene en cuenta márgenes de pantalla.
-	 */
-	public void aplicarVelocidad() {
-		posX += velX;
-		posY += velY;
-		
-	}
 	
 	/** GETTERS && SETTERS **/
-
-	public int getVelX() {
-		return velX;
-	}
-
-	public void setVelX(int velX) {
-		this.velX = velX;
-	}
-
-	public int getVelY() {
-		return velY;
-	}
-
-	public void setVelY(int velY) {
-		this.velY = velY;
-	}
 
 	public int getPosX() {
 		return posX;

@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 import javax.imageio.ImageIO;
 
 import Principal.PanelJuego;
+import Principal.Sprite;
 import pantallas.IPantalla;
 
 public class Nv01 implements IPantalla{
@@ -30,6 +31,9 @@ public class Nv01 implements IPantalla{
 	private DecimalFormat formato = new DecimalFormat("#.##");
 	final Font fuenteTiempo = new Font("", Font.BOLD, 30);
 	final Color colorTiempo = new Color(45, 44, 47);
+	
+	/**SPRITES NIVEL 1**/
+	Sprite smallGato;
 
 	
 	public Nv01(PanelJuego panel) {
@@ -48,12 +52,11 @@ public class Nv01 implements IPantalla{
 			System.out.println("PROBLEMAS AL CARGAR LAS IMÁGENES. FIN DEL PROGRAMA");
 			System.exit(1);
 		}
-		
-		//TABLERO
-		
+				
+		//CREACIÓN GATO
+		smallGato = new Sprite(200, 150, 200, 100, Color.GRAY);
 		
 		//TIEMPO
-		
 		tiempoInicial = System.nanoTime();	
 	}
 
@@ -64,7 +67,7 @@ public class Nv01 implements IPantalla{
 		g.fillRect(0, 0, panelJuego.getWidth(), panelJuego.getHeight());
 		
 		//FONDO TEMPORIZADOR
-		g.drawImage(imagenTemporizador, 20, 20, 120, 100, null);
+		g.drawImage(imagenTemporizador, 20, 20, 140, 100, null);
 		
 		//TIEMPO
 		g.setFont(fuenteTiempo);
@@ -84,7 +87,8 @@ public class Nv01 implements IPantalla{
 			}
 		}
 		
-		
+		//GATOS
+		smallGato.pintarEnMundo(g);
 	}
 
 	@Override
@@ -98,6 +102,12 @@ public class Nv01 implements IPantalla{
 
 	@Override
 	public void pulsarRaton(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void arrastrarRaton(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
