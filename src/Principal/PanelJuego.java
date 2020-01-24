@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
+
 import pantallas.IPantalla;
 import pantallas.PantallaInicio;
 
@@ -64,5 +65,4 @@ public class PanelJuego extends JPanel implements Runnable{
 	public void setPantalla(IPantalla pantalla) {
 		this.pantallaEjecucion=pantalla;
 	}
-
 }

@@ -1,11 +1,13 @@
 package pantallas;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 import Principal.PanelJuego;
+import niveles.Nv01;
 
 public class PantallaInicio implements IPantalla{
 	/**PANEL JUEGO**/
@@ -13,6 +15,9 @@ public class PantallaInicio implements IPantalla{
 	
 	final Font fuenteInicio = new Font("", Font.BOLD, 30);
 	Color colorTitulo = Color.WHITE;
+	
+	/**BOTONES**/
+	Button botonJugar;
 	
 	/**
 	 * Constructor por defecto
@@ -35,11 +40,11 @@ public class PantallaInicio implements IPantalla{
 
 	@Override
 	public void pintarPantalla(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.PINK);
 		g.fillRect(0, 0, panelJuego.getWidth(), panelJuego.getHeight());
 		g.setFont(fuenteInicio);
 		g.setColor(colorTitulo);
-		g.drawString("SLEEPING CATS", panelJuego.getWidth()/2-120, panelJuego.getHeight()/2-10);
+		g.drawString("SLEEPING CATS", panelJuego.getWidth()/2-120, panelJuego.getHeight()/2-150);
 	}
 
 	@Override
@@ -50,7 +55,7 @@ public class PantallaInicio implements IPantalla{
 
 	@Override
 	public void pulsarRaton(MouseEvent e) {
-		panelJuego.setPantalla(new PantallaTutorial(panelJuego));
+		panelJuego.setPantalla(new Nv01(panelJuego));
 	}
 
 }
