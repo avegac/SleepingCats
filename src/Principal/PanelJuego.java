@@ -2,6 +2,8 @@ package Principal;
 
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,7 +14,7 @@ import pantallas.IPantalla;
 import pantallas.PantallaInicio;
 
 /**
- * RUSH HOUR
+ * SLEEPING CATS
  * 
  * @author Alba Vega Calzado
  *
@@ -43,24 +45,41 @@ public class PanelJuego extends JPanel implements Runnable{
 		pantallaEjecucion.pintarPantalla(g);
 	}
 		
-	@Override
-	public void run() {
-		while(true) {
-			repaint();
-			Toolkit.getDefaultToolkit().sync();
-			
-			pantallaEjecucion.ejecutarFrame();
-		}
-	}
-	
 	public void inicializarListeners() {
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				pantallaEjecucion.pulsarRaton(e);
 			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				pantallaEjecucion.arrastrarRaton(e);
+			}
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				pantallaEjecucion.arrastrarRaton(e);
+			}
+		});
+		
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				pantallaEjecucion.redimensionar();
+			}
 		});
 	}
+	
+	@Override
+	public void run() {
+		while(true) {
+			repaint();
+						
+			pantallaEjecucion.ejecutarFrame();
+		}
+	}
+		
 	
 	public void setPantalla(IPantalla pantalla) {
 		this.pantallaEjecucion=pantalla;

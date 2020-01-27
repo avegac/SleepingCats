@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -108,8 +109,7 @@ public class Nv01 implements IPantalla{
 
 	@Override
 	public void arrastrarRaton(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		smallGato.setPosX(e.getX());
 	}
 	
 	

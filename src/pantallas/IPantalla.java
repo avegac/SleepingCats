@@ -13,6 +13,7 @@ public interface IPantalla {
 	/*
 	 * LISTENERS
 	 */
+	public void redimensionar(e);
 	public void pulsarRaton(MouseEvent e);
 	public void arrastrarRaton(MouseEvent e);
 }
