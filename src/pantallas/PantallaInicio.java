@@ -87,11 +87,6 @@ public class PantallaInicio implements IPantalla{
 		
 	}
 
-	@Override
-	public void redimensionar() {
-		fondoEscalado = fondo.getScaledInstance(panelJuego.getWidth(), panelJuego.getHeight(), BufferedImage.SCALE_SMOOTH);
-	}
-	
 	private void rellenarFondo(Graphics g){
 		fondoEscalado = fondo.getScaledInstance(panelJuego.getWidth(), this.panelJuego.getHeight(), BufferedImage.SCALE_SMOOTH);
 		g.drawImage(fondoEscalado, 0, 0, null);

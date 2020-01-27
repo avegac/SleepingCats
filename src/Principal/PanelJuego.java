@@ -21,6 +21,7 @@ import pantallas.PantallaInicio;
  */
 
 public class PanelJuego extends JPanel implements Runnable{
+	private static final long serialVersionUID = 1L;
 	/** PANTALLA **/
 	IPantalla pantallaEjecucion;
 	
@@ -60,13 +61,6 @@ public class PanelJuego extends JPanel implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				pantallaEjecucion.arrastrarRaton(e);
-			}
-		});
-		
-		addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent e) {
-				pantallaEjecucion.redimensionar();
 			}
 		});
 	}

@@ -35,4 +35,10 @@ public class MenuDificultades implements IPantalla{
 		
 	}
 
+	@Override
+	public void arrastrarRaton(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
