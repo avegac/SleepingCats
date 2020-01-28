@@ -115,7 +115,7 @@ public class PantallaInicio implements IPantalla{
 	@Override
 	public void pulsarTecla(KeyEvent e) {
 		if(KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("j")) {
-			panelJuego.setPantalla(new Nv01(panelJuego));
+			panelJuego.setPantalla(new MenuDificultades(panelJuego));
 		}
 		
 		if(KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("r")) {

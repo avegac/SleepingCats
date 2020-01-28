@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -16,6 +14,8 @@ import javax.imageio.ImageIO;
 import Principal.PanelJuego;
 import Principal.Sprite;
 import pantallas.IPantalla;
+import pantallas.PantallaInicio;
+
 import java.awt.event.KeyEvent;
 
 public class Nv01 implements IPantalla{
@@ -25,8 +25,7 @@ public class Nv01 implements IPantalla{
 	/**TABLERO DE JUEGO**/
 	final int TAMANO_TABLERO=6;
 	final Color colorTablero = new Color(255, 235, 201);
-	private BufferedImage bufferTablero;
-	
+		
 	/**VARIABLES PARA EL TIEMPO**/
 	Image imagenTemporizador;
 	private double tiempoInicial = 0;
@@ -35,7 +34,17 @@ public class Nv01 implements IPantalla{
 	final Color colorTiempo = new Color(45, 44, 47);
 	
 	/**SPRITES NIVEL 1**/
-	Sprite smallGato;
+	Sprite pajaro;
+	
+	Sprite smallGatoVerde;
+	Sprite smallGatoNaranja;
+	Sprite smallGatoAzul;
+	
+	Sprite bigGatoLila;
+	Sprite bigGatoAzul;
+	Sprite bigGatoVerde;
+	Sprite bigGatoAmarillo;
+	
 
 	
 	public Nv01(PanelJuego panel) {
@@ -46,6 +55,9 @@ public class Nv01 implements IPantalla{
 	public void inicializarPantalla(PanelJuego panel) {
 		this.panelJuego=panel;
 		
+		panel.setFocusable(true);
+		panel.requestFocusInWindow();
+		
 		//IMÁGENES
 		try {
 			imagenTemporizador = ImageIO.read(new File("src/Imagenes/temporizador.png"));
@@ -55,8 +67,18 @@ public class Nv01 implements IPantalla{
 			System.exit(1);
 		}
 				
-		//CREACIÓN GATO
-		smallGato = new Sprite(200, 150, 200, 100, Color.GRAY);
+		//CREACIÓN GATOS
+		smallGatoVerde = new Sprite(200, 150, 195,95, new Color(141,214,116));
+		smallGatoNaranja = new Sprite(200, 550, 95, 195, new Color(252, 148, 58));
+		smallGatoAzul  = new Sprite(600, 550, 195, 95, new Color(64, 196, 232));
+		
+		bigGatoLila = new Sprite(200, 250, 95, 295, new Color(192, 152, 240));
+		bigGatoAzul = new Sprite(500, 250, 95, 295, new Color(24, 46, 152));
+		bigGatoVerde = new Sprite(400, 650, 295, 95, new Color(14, 127, 84));
+		bigGatoAmarillo = new Sprite(700, 150, 95, 295, new Color(255,235,67));
+		
+		//CREACIÓN PÁJARO
+		pajaro = new Sprite(300, 350, 195, 95, Color.RED);
 		
 		//TIEMPO
 		tiempoInicial = System.nanoTime();	
@@ -89,8 +111,23 @@ public class Nv01 implements IPantalla{
 			}
 		}
 		
+		//Volver
+		g.setFont(new Font("Goudy Stout", Font.PLAIN, 20));
+		g.setColor(Color.BLACK);
+		g.drawString("Volver (V)", 760, 820);
+		
 		//GATOS
-		smallGato.pintarEnMundo(g);
+		smallGatoVerde.pintarEnMundo(g);
+		smallGatoNaranja.pintarEnMundo(g);
+		smallGatoAzul.pintarEnMundo(g);
+		
+		bigGatoLila.pintarEnMundo(g);
+		bigGatoAzul.pintarEnMundo(g);
+		bigGatoVerde.pintarEnMundo(g);
+		bigGatoAmarillo.pintarEnMundo(g);
+		
+		//PÁJARO
+		pajaro.pintarEnMundo(g);
 	}
 
 	@Override
@@ -110,12 +147,15 @@ public class Nv01 implements IPantalla{
 
 	@Override
 	public void arrastrarRaton(MouseEvent e) {
-		smallGato.setPosX(e.getX());
-		smallGato.setPosY(e.getY());
+		
 	}
 
 	@Override
 	public void pulsarTecla(KeyEvent e) {
+		if(KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("v")) {
+			panelJuego.setPantalla(new PantallaInicio(panelJuego));
+		}
+		
 	}
 	
 	

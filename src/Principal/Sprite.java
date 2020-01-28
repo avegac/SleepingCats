@@ -2,11 +2,17 @@ package Principal;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import niveles.Nv01;
 
 /**
  * Representa un objeto en movimiento.
@@ -15,13 +21,12 @@ import javax.imageio.ImageIO;
  * @author Alba Vega Calzado
  *
  */
-public class Sprite {
+public class Sprite{
 	protected int posX;
 	protected int posY;
 	protected int ancho;
 	protected int alto;
 	protected BufferedImage buffer;
-	
 	
 	/**
 	 * Constructor privado para evitar repeticiÃ³n de cÃ³digo en los otros constructores.
@@ -39,6 +44,7 @@ public class Sprite {
 	 */
 	public Sprite(int posX, int posY, int ancho,int alto, Color color) {
 		this(posX, posY, ancho, alto);
+		
 		pintarBuffer(color);
 	}
 	/**
@@ -81,51 +87,6 @@ public class Sprite {
 		g.dispose();
 	}
 	
-	
-
-	/**
-	 * Actualiza la posición del Sprite para que siempre se mantega en el panelJuego.
-	 * @param panelJuego
-	 */
-	/*public void actualizarPosicion(PanelJuego panelJuego) {
-		
-		if(posX+ancho >= panelJuego.getWidth()) { //Si te vas por la derecha!
-			velX= - Math.abs(velX);
-		}
-		if(posX <0 ) {
-			velX = Math.abs(velX) ;
-		}
-		
-		//Eje vertical:
-		if(posY+alto >= panelJuego.getHeight()) { //Si te vas por abajo!!
-			velY = - Math.abs(velY);
-		}
-		if(posY < 0) {
-			velY = Math.abs(velY);
-		}
-		
-		posX = posX+velX;
-		posY = posY+velY;
-	}*/
-	
-	/**
-	 * Comprueba si hay colisión entre este Sprite y otro que viene por parámetros.
-	 * La colisión es cuadrada.
-	 * @param otro
-	 * @return
-	 */
-	public boolean colisiona(Sprite otro) {
-		boolean colisionX = posX < otro.posX ? 
-				(posX+ancho >= otro.posX) : 
-					(otro.posX+otro.ancho >=posX);
-				
-		boolean colisionY = posY < otro.posY ? 
-				(posY+alto >= otro.posY) : 
-					(otro.posY+otro.alto >=posY);
-		
-		return colisionX && colisionY;
-	}
-	
 	/**
 	 * Estampa el {@link Sprite#buffer} del {@link Sprite} en el gráficos de entrada.
 	 * @param g
@@ -133,7 +94,7 @@ public class Sprite {
 	public void pintarEnMundo(Graphics g) {
 		g.drawImage(buffer, posX, posY, null);
 	}
-
+	
 	
 	/** GETTERS && SETTERS **/
 
@@ -175,5 +136,5 @@ public class Sprite {
 
 	public void setBuffer(BufferedImage buffer) {
 		this.buffer = buffer;
-	}	
+	}
 }
