@@ -8,6 +8,10 @@ import java.awt.event.MouseEvent;
 
 import Principal.BotonMenu;
 import Principal.PanelJuego;
+import niveles.Nv01;
+import niveles.Nv02;
+import niveles.Nv11;
+import niveles.Nv12;
 
 public class MenuIntermedio implements IPantalla{
 	/**PANEL JUEGO**/
@@ -57,10 +61,10 @@ public class MenuIntermedio implements IPantalla{
 		nivel11.pintarEnMundo(g);
 		g.setFont(new Font ("Goudy Stout",Font.PLAIN,28));
 		g.setColor(new Color(238, 135, 24));
-		g.drawString("11", 322, 450);
+		g.drawString("1", 335, 450);
 				
 		nivel12.pintarEnMundo(g);
-		g.drawString("12", 622, 450);
+		g.drawString("2", 635, 450);
 	}
 
 	@Override
@@ -83,8 +87,13 @@ public class MenuIntermedio implements IPantalla{
 
 	@Override
 	public void pulsarTecla(KeyEvent e) {
-		// TODO Auto-generated method stub
+		if(KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("1")) {
+			panelJuego.setPantalla(new Nv11(panelJuego));
+		}
 		
+		if(KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("2")) {
+			panelJuego.setPantalla(new Nv12(panelJuego));
+		}
 	}
 
 }
