@@ -1,9 +1,10 @@
 package Principal;
 
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -61,6 +62,13 @@ public class PanelJuego extends JPanel implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				pantallaEjecucion.arrastrarRaton(e);
+			}
+		});
+		
+		this.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				pantallaEjecucion.pulsarTecla(e);
 			}
 		});
 	}

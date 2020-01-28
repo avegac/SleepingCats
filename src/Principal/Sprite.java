@@ -52,17 +52,6 @@ public class Sprite {
 	}
 	
 	/**
-	 * Inicizaliza el {@link Sprite} a partir de un Image ya creado.
-	 * @param imgConstructor
-	 * @param redimensionar Si vale verdadero es necesario redimensionar el buffer de entrada.
-	 */
-	public Sprite(int posX, int posY, int ancho,int alto, Image imgConstructor, boolean redimensionar) {
-		this(posX, posY, ancho, alto);
-		pintarBuffer(imgConstructor, redimensionar );
-	}
-	
-		
-	/**
 	 * Pinta el buffer del color dado
 	 * @param color
 	 */
@@ -92,21 +81,7 @@ public class Sprite {
 		g.dispose();
 	}
 	
-	/**
-	 * Estampa la imagen en la ruta (a veces la redimensiona, a veces no).
-	 * @param imgConstructor
-	 * @param redimensionar
-	 */
-	private void pintarBuffer(Image imgConstructor, boolean redimensionar) {
-		buffer = new BufferedImage(this.ancho, this.alto, BufferedImage.TYPE_INT_ARGB);
-		Graphics g = buffer.getGraphics();
-		g.drawImage(
-				redimensionar ? imgConstructor.getScaledInstance(this.ancho, this.alto, Image.SCALE_SMOOTH) : imgConstructor ,
-				0,
-				0,
-				null);
-		g.dispose();
-	}
+	
 
 	/**
 	 * Actualiza la posición del Sprite para que siempre se mantega en el panelJuego.

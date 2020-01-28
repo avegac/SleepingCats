@@ -18,11 +18,6 @@ public class BotonMenu {
 	/**Buffer para la imagen de fondo**/
 	private BufferedImage buffer;
 	
-	/**
-	 * Constructor por defecto
-	 */
-	public BotonMenu() {}
-	
 	public BotonMenu(int posX, int posY, int ancho, int alto, String ruta) {
 		this.posX = posX;
 		this.posY = posY; 
@@ -51,7 +46,9 @@ public class BotonMenu {
 		g.dispose();
 	}
 	
-
-
+	public void pintarEnMundo(Graphics g) {
+		g.drawImage(buffer, posX, posY, null);
+	}
+	
 	
 }

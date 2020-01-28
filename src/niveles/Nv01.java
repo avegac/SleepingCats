@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import Principal.PanelJuego;
 import Principal.Sprite;
 import pantallas.IPantalla;
+import java.awt.event.KeyEvent;
 
 public class Nv01 implements IPantalla{
 	/**PANEL JUEGO**/
@@ -110,6 +111,11 @@ public class Nv01 implements IPantalla{
 	@Override
 	public void arrastrarRaton(MouseEvent e) {
 		smallGato.setPosX(e.getX());
+		smallGato.setPosY(e.getY());
+	}
+
+	@Override
+	public void pulsarTecla(KeyEvent e) {
 	}
 	
 	
