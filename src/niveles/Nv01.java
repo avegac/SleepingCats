@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -15,6 +16,8 @@ import Principal.PanelJuego;
 import Principal.Sprite;
 import pantallas.IPantalla;
 import pantallas.PantallaInicio;
+import utiles.Entidad;
+import utiles.Tablero;
 
 import java.awt.event.KeyEvent;
 
@@ -23,6 +26,7 @@ public class Nv01 implements IPantalla{
 	PanelJuego panelJuego;
 	
 	/**TABLERO DE JUEGO**/
+	Tablero tablero;
 	final int TAMANO_TABLERO=6;
 	final Color colorTablero = new Color(255, 235, 201);
 		
@@ -36,6 +40,7 @@ public class Nv01 implements IPantalla{
 	/**SPRITES NIVEL 1**/
 	Sprite pajaro;
 	
+	ArrayList<Sprite> gatos;
 	Sprite smallGatoVerde;
 	Sprite smallGatoNaranja;
 	Sprite smallGatoAzul;
@@ -58,6 +63,11 @@ public class Nv01 implements IPantalla{
 		panel.setFocusable(true);
 		panel.requestFocusInWindow();
 		
+		tablero = new Tablero();
+		tablero.setAlto(6);
+		tablero.setAncho(6);
+		tablero.fill();
+		
 		//IMÁGENES
 		try {
 			imagenTemporizador = ImageIO.read(new File("src/Imagenes/temporizador.png"));
@@ -66,9 +76,11 @@ public class Nv01 implements IPantalla{
 			System.out.println("PROBLEMAS AL CARGAR LAS IMÁGENES. FIN DEL PROGRAMA");
 			System.exit(1);
 		}
-				
+		
 		//CREACIÓN GATOS
-		smallGatoVerde = new Sprite(200, 150, 195,95, new Color(141,214,116));
+		gatos = new ArrayList<>();
+		
+		smallGatoVerde = new Sprite(200, 150, 195,95, new Color(141,214,116), new Entidad(0,2,1,0,0));
 		smallGatoNaranja = new Sprite(200, 550, 95, 195, new Color(252, 148, 58));
 		smallGatoAzul  = new Sprite(600, 550, 195, 95, new Color(64, 196, 232));
 		
@@ -77,8 +89,14 @@ public class Nv01 implements IPantalla{
 		bigGatoVerde = new Sprite(400, 650, 295, 95, new Color(14, 127, 84));
 		bigGatoAmarillo = new Sprite(700, 150, 95, 295, new Color(255,235,67));
 		
+		for(Sprite gato : gatos) {
+			tablero.putEntity(gato.getData());
+		}
+		tablero.putEntity(smallGatoVerde.getData());
+		
 		//CREACIÓN PÁJARO
 		pajaro = new Sprite(300, 350, 195, 95, Color.RED);
+		tablero.putEntity(pajaro.getData());
 		
 		//TIEMPO
 		tiempoInicial = System.nanoTime();	

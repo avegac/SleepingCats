@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import niveles.Nv01;
+import utiles.Entidad;
 
 /**
  * Representa un objeto en movimiento.
@@ -27,6 +28,7 @@ public class Sprite{
 	protected int ancho;
 	protected int alto;
 	protected BufferedImage buffer;
+	protected Entidad data;
 	
 	/**
 	 * Constructor privado para evitar repetición de código en los otros constructores.
@@ -47,6 +49,15 @@ public class Sprite{
 		
 		pintarBuffer(color);
 	}
+	
+	public Sprite(int posX, int posY, int ancho,int alto, Color color, Entidad data) {
+		this(posX, posY, ancho, alto);
+		
+		this.data = data;
+		
+		pintarBuffer(color);
+	}
+	
 	/**
 	 * Inicializa el {@link Sprite} a partir de una ruta.
 	 * Si hay varios sprites con la misma ruta, mejor evitar este constructor para evitar accesos a disco.
@@ -128,6 +139,14 @@ public class Sprite{
 
 	public void setAlto(int alto) {
 		this.alto = alto;
+	}
+	
+	public Entidad getData() {
+		return data;
+	}
+	
+	public void setData(Entidad data) {
+		this.data = data;
 	}
 
 	public BufferedImage getBuffer() {
