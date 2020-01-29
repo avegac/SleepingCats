@@ -37,5 +37,8 @@ public class Casilla {
 		this.state = state;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Casilla [id=" + id + ", state=" + state + "]";
+	}
 }
