@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -20,6 +21,13 @@ import utiles.Entidad;
 import utiles.Tablero;
 
 import java.awt.event.KeyEvent;
+
+/**
+ * Nivel 1 de dificultad Principiante (nivel 01).
+ * 
+ * @author Alba Vega Calzado
+ *
+ */
 
 public class Nv01 implements IPantalla{
 	/**PANEL JUEGO**/
@@ -38,9 +46,9 @@ public class Nv01 implements IPantalla{
 	final Color colorTiempo = new Color(45, 44, 47);
 	
 	/**SPRITES NIVEL 1**/
+	//Están creados por separado y luego añadidos a la lista para poder probarlos individualmente
 	Sprite pajaro;
 	
-	ArrayList<Sprite> gatos;
 	Sprite smallGatoVerde;
 	Sprite smallGatoNaranja;
 	Sprite smallGatoAzul;
@@ -50,12 +58,20 @@ public class Nv01 implements IPantalla{
 	Sprite bigGatoVerde;
 	Sprite bigGatoAmarillo;
 	
-
+	List<Sprite> gatos; 
+	int selectedSprite = -1;
 	
+	/**
+	 * Constructor al que le pasamos el panel de juego para que inicialice los elementos del nivel
+	 * @param panel
+	 */
 	public Nv01(PanelJuego panel) {
 		inicializarPantalla(panel);
 	}
 
+	/**
+	 * Método para inicializar todos los elementos del nivel
+	 */
 	@Override
 	public void inicializarPantalla(PanelJuego panel) {
 		this.panelJuego=panel;
@@ -63,9 +79,10 @@ public class Nv01 implements IPantalla{
 		panel.setFocusable(true);
 		panel.requestFocusInWindow();
 		
+		//TABLERO CON DIMENSIONES
 		tablero = new Tablero();
-		tablero.setAlto(6);
-		tablero.setAncho(6);
+		tablero.setHeight(6);
+		tablero.setWidth(6);
 		tablero.fill();
 		
 		//IMÁGENES
@@ -81,13 +98,28 @@ public class Nv01 implements IPantalla{
 		gatos = new ArrayList<>();
 		
 		smallGatoVerde = new Sprite(200, 150, 195,95, new Color(141,214,116), new Entidad(0,2,1,0,0));
-		smallGatoNaranja = new Sprite(200, 550, 95, 195, new Color(252, 148, 58));
-		smallGatoAzul  = new Sprite(600, 550, 195, 95, new Color(64, 196, 232));
+		smallGatoNaranja = new Sprite(200, 550, 95, 195, new Color(252, 148, 58), new Entidad(1,1,2,0,4));
+		smallGatoAzul  = new Sprite(600, 550, 195, 95, new Color(64, 196, 232), new Entidad(2,2,1,4,4));
 		
-		bigGatoLila = new Sprite(200, 250, 95, 295, new Color(192, 152, 240));
-		bigGatoAzul = new Sprite(500, 250, 95, 295, new Color(24, 46, 152));
-		bigGatoVerde = new Sprite(400, 650, 295, 95, new Color(14, 127, 84));
-		bigGatoAmarillo = new Sprite(700, 150, 95, 295, new Color(255,235,67));
+		bigGatoLila = new Sprite(200, 250, 95, 295, new Color(192, 152, 240), new Entidad(3,1,3,0,1));
+		bigGatoAzul = new Sprite(500, 250, 95, 295, new Color(24, 46, 152), new Entidad(4,1,3,3,1));
+		bigGatoVerde = new Sprite(400, 650, 295, 95, new Color(14, 127, 84), new Entidad(5,3,1,2,5));
+		bigGatoAmarillo = new Sprite(700, 150, 95, 295, new Color(255,235,67), new Entidad(6,1,3,5,0));
+		
+		//Indicamos qué gatos son los que están en posición vertical
+		bigGatoLila.getData().setVertical(true);
+		bigGatoAmarillo.getData().setVertical(true);
+		bigGatoAzul.getData().setVertical(true);
+		
+		//Añadimos todos los gatos a la lista
+		gatos.add(smallGatoAzul);
+		gatos.add(smallGatoVerde);
+		gatos.add(smallGatoNaranja);
+		
+		gatos.add(bigGatoLila);
+		gatos.add(bigGatoAzul);
+		gatos.add(bigGatoVerde);
+		gatos.add(bigGatoAmarillo);
 		
 		for(Sprite gato : gatos) {
 			tablero.putEntity(gato.getData());
@@ -95,7 +127,8 @@ public class Nv01 implements IPantalla{
 		tablero.putEntity(smallGatoVerde.getData());
 		
 		//CREACIÓN PÁJARO
-		pajaro = new Sprite(300, 350, 195, 95, Color.RED);
+		pajaro = new Sprite(300, 350, 195, 95, Color.RED, new Entidad(7,2,1,1,2));
+		//Añadimos el pájaro al tablero
 		tablero.putEntity(pajaro.getData());
 		
 		//TIEMPO

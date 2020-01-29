@@ -1,6 +1,7 @@
 package utiles;
 
 /**
+ * Clase que recoge la información sobre la casilla que luego incluiremos en un array dentro del tablero
  * 
  * @author Alba Vega Calzado
  *
