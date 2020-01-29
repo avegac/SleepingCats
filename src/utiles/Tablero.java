@@ -1,6 +1,9 @@
 package utiles;
 
+import java.util.Arrays;
+
 /**
+ * Clase que recoge la información sobre el tablero de juego y que nos permite posicionar sobre el los diferentes bloques.
  * 
  * @author Alba Vega Calzado
  *
@@ -32,12 +35,40 @@ public class Tablero {
 		}
 	}
 	
+	/**
+	 * Método para incluir los bloques en las casillas del tablero. Cambiamos su estado en función de si están o no ocupadas por un bloque.
+	 * @param entidad
+	 */
 	public void putEntity(Entidad entidad) {
 		int xmax = entidad.getxOrigin() + entidad.getxSize();
 		int ymax = entidad.getyOrigin() + entidad.getySize();
 		
-		for(int z = entidad.getyOrigin(); z<ymax; z++) {
-			
+		for(int i = entidad.getxOrigin(); i < ymax; i++) {
+			for(int z = entidad.getyOrigin(); z < ymax; z++) {
+				//Control para ver por consola si se están incluyendo las entidades (bloques) correctamente en el tablero
+				System.out.println("i: "+i);
+				System.out.println("z: "+z);
+				
+				casillas[z][i].setState(entidad.getId());
+			}
+		}
+		
+		//Control para ver que el tablero se ha rellenado correctamente
+		System.out.println(Arrays.deepToString(casillas));
+	}
+	
+	/**
+	 * Método para eliminar un bloque del tablero
+	 * @param id identificador del bloque
+	 */
+	public void clearEntity(int id) {
+		for(int i = this.height - 1; i >= 0; i--) {
+			for(int z = this.width - 1; z >= 0; z--) {
+				//Si el estado de la casilla es la id de un bloque, lo cambiamos a -1, que es el que indica que la casilla está vacía
+				if(casillas[i][z].getState() == id) {
+					casillas[i][z].setState(-1);
+				}
+			}
 		}
 	}
 	
