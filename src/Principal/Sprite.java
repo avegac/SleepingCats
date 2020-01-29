@@ -40,20 +40,20 @@ public class Sprite{
 		this.alto = alto;
 	}
 	
+	private Sprite(int posX, int posY, int ancho,int alto, Entidad data) {
+		this.posX = posX;
+		this.posY = posY; 
+		this.ancho = ancho; 
+		this.alto = alto;
+		this.data = data;
+	}
+	
 	/**
 	 * Inicializa el {@link Sprite} con un color.
 	 * @param color Color del sprite.
 	 */
 	public Sprite(int posX, int posY, int ancho,int alto, Color color) {
 		this(posX, posY, ancho, alto);
-		
-		pintarBuffer(color);
-	}
-	
-	public Sprite(int posX, int posY, int ancho,int alto, Color color, Entidad data) {
-		this(posX, posY, ancho, alto);
-		
-		this.data = data;
 		
 		pintarBuffer(color);
 	}
@@ -65,6 +65,25 @@ public class Sprite{
 	 */
 	public Sprite(int posX, int posY, int ancho,int alto, String ruta) {
 		this(posX, posY, ancho, alto);
+		pintarBuffer(ruta);
+	}
+	
+	/**
+	 * Inicializa el {@link Sprite} con un color.
+	 * @param color Color del sprite.
+	 */
+	public Sprite(int posX, int posY, int ancho,int alto, Color color, Entidad data) {
+		this(posX, posY, ancho, alto, data);
+		
+		pintarBuffer(color);
+	}
+	/**
+	 * Inicializa el {@link Sprite} a partir de una ruta.
+	 * Si hay varios sprites con la misma ruta, mejor evitar este constructor para evitar accesos a disco.
+	 * @param ruta Ruta de la imagen.
+	 */
+	public Sprite(int posX, int posY, int ancho,int alto, String ruta, Entidad data) {
+		this(posX, posY, ancho, alto, data);
 		pintarBuffer(ruta);
 	}
 	
@@ -155,5 +174,10 @@ public class Sprite{
 
 	public void setBuffer(BufferedImage buffer) {
 		this.buffer = buffer;
+	}
+	
+	@Override
+	public String toString() {
+		return "Sprite [posX=" + posX + ", posY=" + posY + ", ancho=" + ancho + ", alto=" + alto + ", buffer=" + buffer+ ", data=" + data + "]";
 	}
 }
