@@ -83,5 +83,8 @@ public class Entidad {
 		this.vertical=vertical;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Entidad [id=" + id + ", xSize=" + xSize + ", ySize=" + ySize + ", xOrigin=" + xOrigin + ", yOrigin="+ yOrigin + ", vertical=" + vertical + "]";
+	}
 }
