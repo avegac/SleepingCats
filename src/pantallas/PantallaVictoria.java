@@ -15,6 +15,13 @@ import javax.imageio.ImageIO;
 
 import Principal.PanelJuego;
 
+/**
+ * Pantalla de victoria que aparece cuando reunimos las condiciones de victoria.
+ * 
+ * @author Alba Vega Calzado
+ *
+ */
+
 public class PantallaVictoria implements IPantalla {
 	/** PANEL JUEGO **/
 	PanelJuego panelJuego;
