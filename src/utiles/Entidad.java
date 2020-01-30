@@ -17,11 +17,11 @@ public class Entidad {
 	
 	/**
 	 * Constructor parametrizado
-	 * @param id identificador de la entidad
-	 * @param xSize número de casillas que ocupa la entidad en el eje x
-	 * @param ySize número de casillas que ocupa la entidad en el eje y
-	 * @param xOrigin coordenada x inicial de la entidad
-	 * @param yOrigin coordenada y inicial de la entidad
+	 * @param id Identificador de la entidad
+	 * @param xSize Número de casillas que ocupa la entidad en el eje x
+	 * @param ySize Número de casillas que ocupa la entidad en el eje y
+	 * @param xOrigin Coordenada x inicial de la entidad
+	 * @param yOrigin Coordenada y inicial de la entidad
 	 */
 	public Entidad(int id, int xSize, int ySize, int xOrigin, int yOrigin) {
 		super();
@@ -32,9 +32,8 @@ public class Entidad {
 		this.yOrigin=yOrigin;
 	}
 	
-	/*
-	 * Getters y setters
-	 */
+	/**GETTERS Y SETTERS**/
+	
 	public int getId() {
 		return id;
 	}
