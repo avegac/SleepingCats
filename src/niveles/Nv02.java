@@ -146,12 +146,6 @@ public class Nv02 implements IPantalla{
 	}
 
 	@Override
-	public void arrastrarRaton(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void pulsarTecla(KeyEvent e) {
 		if(KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("v")) {
 			panelJuego.setPantalla(new PantallaInicio(panelJuego));

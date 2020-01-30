@@ -101,12 +101,6 @@ public class PantallaInicio implements IPantalla{
 		
 	}
 
-	@Override
-	public void arrastrarRaton(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	private void rellenarFondo(Graphics g){
 		fondoEscalado = fondo.getScaledInstance(panelJuego.getWidth(), this.panelJuego.getHeight(), BufferedImage.SCALE_SMOOTH);
 		g.drawImage(fondoEscalado, 0, 0, null);

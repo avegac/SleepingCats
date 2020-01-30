@@ -80,12 +80,6 @@ public class MenuIntermedio implements IPantalla{
 	}
 
 	@Override
-	public void arrastrarRaton(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void pulsarTecla(KeyEvent e) {
 		if(KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("1")) {
 			panelJuego.setPantalla(new Nv11(panelJuego));

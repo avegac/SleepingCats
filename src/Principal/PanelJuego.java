@@ -53,16 +53,6 @@ public class PanelJuego extends JPanel implements Runnable{
 			public void mousePressed(MouseEvent e) {
 				pantallaEjecucion.pulsarRaton(e);
 			}
-			
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				pantallaEjecucion.arrastrarRaton(e);
-			}
-			
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				pantallaEjecucion.arrastrarRaton(e);
-			}
 		});
 		
 		this.addKeyListener(new KeyAdapter() {

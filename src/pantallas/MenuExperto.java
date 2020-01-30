@@ -75,12 +75,6 @@ public class MenuExperto implements IPantalla{
 	}
 
 	@Override
-	public void arrastrarRaton(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void pulsarTecla(KeyEvent e) {
 		// TODO Auto-generated method stub
 		

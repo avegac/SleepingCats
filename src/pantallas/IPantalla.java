@@ -15,6 +15,5 @@ public interface IPantalla {
 	 * LISTENERS
 	 */
 	public void pulsarRaton(MouseEvent e);
-	public void arrastrarRaton(MouseEvent e);
 	public void pulsarTecla(KeyEvent e);
 }

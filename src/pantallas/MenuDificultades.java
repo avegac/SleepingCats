@@ -108,12 +108,6 @@ public class MenuDificultades implements IPantalla{
 	}
 
 	@Override
-	public void arrastrarRaton(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void pulsarTecla(KeyEvent e) {
 		if(KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("p")) {
 			panelJuego.setPantalla(new MenuPrincipiante(panelJuego));
