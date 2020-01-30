@@ -11,7 +11,6 @@ import java.text.DecimalFormat;
 
 import java.util.HashMap;
 
-
 import javax.imageio.ImageIO;
 
 import Principal.PanelJuego;
@@ -60,7 +59,7 @@ public class Nv01 implements IPantalla {
 	Sprite bigGatoAzul;
 	Sprite bigGatoVerde;
 	Sprite bigGatoAmarillo;
-	
+
 	Sprite meta;
 
 	HashMap<Integer, Sprite> sprites;
@@ -138,10 +137,9 @@ public class Nv01 implements IPantalla {
 			tablero.putEntity(sprites.get(key).getData());
 		}
 
-		
 		// META
 		meta = new Sprite(760, 330, 150, 150, "src/Imagenes/meta.png");
-		
+
 		// TIEMPO
 		tiempoInicial = System.nanoTime();
 	}
@@ -185,7 +183,7 @@ public class Nv01 implements IPantalla {
 		for (int key : sprites.keySet()) {
 			sprites.get(key).pintarEnMundo(g);
 		}
-		
+
 		meta.pintarEnMundo(g);
 	}
 
@@ -198,14 +196,16 @@ public class Nv01 implements IPantalla {
 		}
 	}
 
+	/**
+	 * Listener que recoge el click del ratón sobre la pantalla. En función de si ya
+	 * habíamos hecho click con anterioridad en un sprite o no, nos dirige a un
+	 * método diferente.
+	 */
 	@Override
 	public void pulsarRaton(MouseEvent e) {
-		// Si no hay ningún sprite selecionado
 		if (this.selectedSpriteId == -1) {
 			noHaySpriteSeleccionado(e);
-		}
-		// Si ya hay un sprite seleccionado
-		else {
+		} else {
 			haySpriteSeleccionado(e);
 		}
 	}
@@ -216,24 +216,32 @@ public class Nv01 implements IPantalla {
 			panelJuego.setPantalla(new MenuPrincipiante(panelJuego));
 		}
 	}
-	
-	
+
+	/**
+	 * Método que se llama si no había ningún sprite seleccionado cuando hacemos
+	 * click con el ratón sobre el tablero. Recorre la lista de bloques y determina
+	 * sus dimensiones, después comprueba si las coordenadas del ratón se encuentran
+	 * dentro de alguno de los bloques calculados.
+	 * 
+	 * Si el click está dentro de uno de los bloques, la id del sprite seleccionado
+	 * pasa a ser la misma que la de found
+	 * 
+	 * @param e  Click del ratón
+	 */
 	public void noHaySpriteSeleccionado(MouseEvent e) {
-		// Esta variable devuelve un número positivo si lo que seleccionamos es un gato,
-		// y -1 si seleccionamos una casilla vacía
 		int found = -1;
 		int i = 0;
 
-		// Vamos recorriendo toda la lista de gatos
+		/*Vamos recorriendo toda la lista de gatos*/
 		while (i < this.sprites.size() && found == -1) {
 			Sprite gA = this.sprites.get(i);
 
-			// Determinamos los límites del bloque
+			/*Determinamos los límites del bloque*/
 			int maxX = gA.getPosX() + gA.getAncho();
 			int maxY = gA.getPosY() + gA.getAlto();
 
-			// Si el click del ratón está dentro de los límites del bloque (o sea, si
-			// hacemos click en el bloque)
+			/*Si el click del ratón está dentro de los límites del bloque (o sea, si
+			hacemos click en el bloque)*/
 			if ((e.getX() >= gA.getPosX() && e.getX() <= maxX) && (e.getY() >= gA.getPosY() && e.getY() <= maxY)) {
 				found = i;
 			}
@@ -241,81 +249,108 @@ public class Nv01 implements IPantalla {
 			i++;
 		}
 
-		// Si hemos clickado un bloque
 		if (found >= 0) {
 			this.selectedSpriteId = found;
 		}
 
-		// Control para ver por consola si el número de la lista de sprites que devuelve
-		// se corresponde con el sprite clickado
+		/*Control para ver por consola si el número de la lista de sprites que devuelve
+		se corresponde con el sprite clickado*/
 		if (this.selectedSpriteId >= 0) {
 			System.out.println(this.sprites.get(this.selectedSpriteId));
 		}
 	}
 
+	/**
+	 * Método que se llama si ya hay un sprite seleccionado cuando hacemos click con
+	 * el ratón, lo que indica que nuestro click va a ser la casilla a la que
+	 * queremos mover ese sprite.
+	 * 
+	 * Obtiene las coordenadas de la casilla seleccionada y sus dimensiones y comprueba
+	 * si está o no ocupada. Si está vacía, llama al método que comprueba la orientación
+	 * de la pieza que queremos mover (horizontal o vertical)
+	 * 
+	 * @param e Click del ratón
+	 */
 	public void haySpriteSeleccionado(MouseEvent e) {
 		int found = -2;
 		Casilla casillaElegida = null;
 
 		for (int i = 0; i < this.tablero.getWidth() && found == -2; i++) {
 			for (int z = 0; z < this.tablero.getHeight() && found == -2; z++) {
-				// Obtenemos la casilla
+				/* Obtenemos la casilla*/
 				Casilla casilla = this.tablero.getCasillas()[i][z];
 
-				// Obtenemos los límites de la casilla
+				/* Obtenemos los límites de la casilla */
 				int minX = z * 100 + (200);
 				int minY = i * 100 + (150);
 				int maxX = minX + 100;
 				int maxY = minY + 100;
 
-				// Si el click del ratón está dentro de los límites de la casilla
+				/* Si el click del ratón está dentro de los límites de la casilla */
 				if ((e.getX() >= minX && e.getX() <= maxX) && (e.getY() >= minY && e.getY() <= maxY)) {
-					// Obtenemos el estado de la casilla para ver si está ocupada (-1) o no
+					/* Obtenemos el estado de la casilla para ver si está ocupada (-1) o no */
 					found = casilla.getState();
 					casillaElegida = casilla;
 				}
 			}
 		}
 
-		// Control para ver si el id del sprite que nos devuelve corresponde con el que
-		// hemos clickado
+		/* Control para ver si el id del sprite que nos devuelve corresponde con el que
+		 hemos clickado */
 		System.out.println("pieza = " + found);
 
-		// Si la casilla de destino está vacía
+		/* Si la casilla de destino está vacía */
 		if (found == -1) {
 			comprobarOrientacion(casillaElegida);
 		}
 		this.selectedSpriteId = -1;
 	}
 
+	/**
+	 * Método que comprueba si la pieza que queremos mover es horizontal o vertical.
+	 * 
+	 * En función de la orientación de la pieza, llama a un método u otro.
+	 * 
+	 * También comprueba si se han producido las condiciones de victoria
+	 * después de realizar el movimiento.
+	 * 
+	 * @param casillaElegida Casilla que tenemos seleccionada como destino
+	 */
 	public void comprobarOrientacion(Casilla casillaElegida) {
-		// Creamos un nuevo sprite que recoge el bloque que seleccionemos
+		/* Creamos un nuevo sprite que recoge el bloque que seleccionemos */
 		Sprite piezaElegida = this.sprites.get(this.selectedSpriteId);
 
-		// Buscar la pieza
+		/* Buscar la pieza */
 		if (piezaElegida != null) {
 			// Control para ver por consola el bloque que está seleccionado
 			System.out.println(piezaElegida);
 
-			// Si el bloque seleccionado es vertical
+			/* Si el bloque seleccionado es vertical */
 			if (piezaElegida.getData().getVertical()) {
 				comprobarMovimientoVertical(casillaElegida, piezaElegida);
 			}
-			// Si es horizontal
+			/* Si es horizontal */
 			else {
 				comprobarMovimientoHorizontal(casillaElegida, piezaElegida);
 			}
 		}
 
-		if(esVictoria()) {
+		/*Si se producen las condiciones de victoria*/
+		if (esVictoria()) {
 			panelJuego.setPantalla(new PantallaVictoria(panelJuego, System.nanoTime() - tiempoInicial));
 		}
 	}
 
-	public boolean esVictoria() {
-		return (pajaro.getData().getxOrigin() == this.tablero.getWidth() - pajaro.getData().getxSize());
-	}
-	
+	/**
+	 * Método que comprueba si el movimiento a la casilla elegida se puede realizar teniendo en cuenta
+	 * la orientación de la pieza, ya que aunque la casilla esté vacía hay movimientos no permitidos.
+	 * Comprueba si el movimiento a realizar es hacia arriba (ascendente) o hacia abajo (descendente).
+	 * 
+	 * Si el movimiento es posible, llama al método para mover la pieza en vertical.
+	 * 
+	 * @param casillaElegida	Casilla de destino de la pieza
+	 * @param piezaElegida		Pieza seleccionada con el ratón
+	 */
 	public void comprobarMovimientoVertical(Casilla casillaElegida, Sprite piezaElegida) {
 		boolean isDescendente = piezaElegida.getData().getyOrigin() < casillaElegida.getPosY();
 
@@ -341,6 +376,17 @@ public class Nv01 implements IPantalla {
 		}
 	}
 
+	/**
+	 * Método que comprueba si el movimiento a la casilla elegida se puede realizar teniendo en cuenta
+	 * la orientación de la pieza, ya que aunque la casilla esté vacía hay movimientos no permitidos.
+	 * 
+	 * Comprueba si el movimiento a realizar es hacia la izquierda o hacia la derecha(isDerecha).
+	 * 
+	 * Si el movimiento es posible, llama al método para mover la pieza en horizontal.
+	 * 
+	 * @param casillaElegida	Casilla de destino de la pieza
+	 * @param piezaElegida		Pieza seleccionada con el ratón
+	 */
 	public void comprobarMovimientoHorizontal(Casilla casillaElegida, Sprite piezaElegida) {
 		boolean isDerecha = piezaElegida.getData().getxOrigin() < casillaElegida.getPosX();
 		System.out.println("Movimiento Horizontal " + (isDerecha ? "Derecho" : "Izquierdo"));
@@ -365,6 +411,13 @@ public class Nv01 implements IPantalla {
 		}
 	}
 
+	/**
+	 * Método que realiza el movimiento de la pieza en vertical en función de si es o no ascendente.
+	 * 
+	 * @param casillaElegida	Casilla de destino de la pieza
+	 * @param piezaElegida		Pieza seleccionada
+	 * @param isDescendente		Indica si el movimiento es hacia abajo o no
+	 */
 	public void moverPiezaVertical(Casilla casillaElegida, Sprite piezaElegida, boolean isDescendente) {
 		int nuevaPosicion;
 
@@ -376,19 +429,26 @@ public class Nv01 implements IPantalla {
 
 		System.out.println(nuevaPosicion);
 
-		// Movemos la coordenada y de origen del sprite a la de la casilla seleccionada
+		/* Movemos la coordenada y de origen del sprite a la de la casilla seleccionada */
 		piezaElegida.getData().setyOrigin(nuevaPosicion);
 		piezaElegida.setPosY(piezaElegida.getData().getyOrigin() * 100 + (150));
 
-		// Control para ver por consola si ha detectado correctamente el cambio de
-		// coordenada de la casilla y si sabe que tiene que repintarla en la nueva
-		// posición
+		/* Control para ver por consola si ha detectado correctamente el cambio de
+		coordenada de la casilla y si sabe que tiene que repintarla en la nueva
+		posición */
 		System.out.println("Pintamos");
-		
+
 		repintarPieza(piezaElegida);
 
 	}
 
+	/**
+	 * Método que realiza el movimiento de la pieza en horizontal en función de si es hacia la derecha o hacia la izquierda.
+	 * 
+	 * @param casillaElegida	Casilla de destino de la pieza
+	 * @param piezaElegida		Pieza seleccionada
+	 * @param isDerecha			Indica si el movimiento es hacia la derecha o hacia la izquierda
+	 */
 	public void moverPiezaHorizontal(Casilla casillaElegida, Sprite piezaElegida, boolean isDerecha) {
 		int nuevaPosicion;
 
@@ -400,18 +460,34 @@ public class Nv01 implements IPantalla {
 
 		System.out.println(nuevaPosicion);
 
+		/* Movemos la coordenada y de origen del sprite a la de la casilla seleccionada */
 		piezaElegida.getData().setxOrigin(nuevaPosicion);
 		piezaElegida.setPosX(piezaElegida.getData().getxOrigin() * 100 + (200));
 
+		/* Control para ver por consola si ha detectado correctamente el cambio de
+		coordenada de la casilla y si sabe que tiene que repintarla en la nueva
+		posición */
 		System.out.println("Pintamos");
 
 		repintarPieza(piezaElegida);
 	}
 
+	/**
+	 * Método que recoge los datos de la pieza que vamos a mover, la elimina del tablero
+	 * y la vuelve a pintar en la nueva posición con las coordenadas nuevas.
+	 * 
+	 * @param piezaElegida	Pieza a mover
+	 */
 	public void repintarPieza(Sprite piezaElegida) {
-		// Eliminamos el sprite de su posición inicial en el tablero y lo incluimos en
-		// la posición final
 		this.tablero.clearEntity(piezaElegida.getData().getId());
 		this.tablero.putEntity(piezaElegida.getData());
+	}
+	
+	/**
+	 * Método que comprueba si el sprite del pájaro ha llegado al borde derecho del tablero
+	 * @return	true si ha llegado al borde y false si aún no ha llegado
+	 */
+	public boolean esVictoria() {
+		return (pajaro.getData().getxOrigin() == this.tablero.getWidth() - pajaro.getData().getxSize());
 	}
 }
