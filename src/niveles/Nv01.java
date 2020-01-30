@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -47,7 +48,6 @@ public class Nv01 implements IPantalla{
 	final Color colorTiempo = new Color(45, 44, 47);
 	
 	/**SPRITES NIVEL 1**/
-	//Están creados por separado y luego añadidos a la lista para poder probarlos individualmente
 	Sprite pajaro;
 	
 	Sprite smallGatoVerde;
@@ -59,8 +59,8 @@ public class Nv01 implements IPantalla{
 	Sprite bigGatoVerde;
 	Sprite bigGatoAmarillo;
 	
-	List<Sprite> gatos; 
-	int selectedSprite = -1;
+	HashMap<Integer, Sprite> sprites;
+	int selectedSpriteId = -1;
 	
 	/**
 	 * Constructor al que le pasamos el panel de juego para que inicialice los elementos del nivel
@@ -96,7 +96,7 @@ public class Nv01 implements IPantalla{
 		}
 		
 		//CREACIÓN GATOS
-		gatos = new ArrayList<>();
+		sprites = new HashMap<>();
 		
 		smallGatoVerde = new Sprite(200, 150, 195,95, new Color(141,214,116), new Entidad(0,2,1,0,0));
 		smallGatoNaranja = new Sprite(200, 550, 95, 195, new Color(252, 148, 58), new Entidad(1,1,2,0,4));
@@ -111,6 +111,7 @@ public class Nv01 implements IPantalla{
 		bigGatoLila.getData().setVertical(true);
 		bigGatoAmarillo.getData().setVertical(true);
 		bigGatoAzul.getData().setVertical(true);
+		smallGatoNaranja.getData().setVertical(true);
 		
 		//Añadimos todos los gatos a la lista
 		gatos.add(smallGatoAzul);
