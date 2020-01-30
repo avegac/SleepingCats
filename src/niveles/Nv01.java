@@ -210,6 +210,9 @@ public class Nv01 implements IPantalla {
 		}
 	}
 
+	/**
+	 * Método que detecta la tecla pulsada y nos devuelve a la pantalla correspondiente
+	 */
 	@Override
 	public void pulsarTecla(KeyEvent e) {
 		if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("v")) {
