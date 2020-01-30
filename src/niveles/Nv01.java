@@ -8,16 +8,17 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
+
 
 import javax.imageio.ImageIO;
 
 import Principal.PanelJuego;
 import Principal.Sprite;
 import pantallas.IPantalla;
-import pantallas.PantallaInicio;
+import pantallas.MenuPrincipiante;
+
 import pantallas.PantallaVictoria;
 import utiles.Casilla;
 import utiles.Entidad;
@@ -59,6 +60,8 @@ public class Nv01 implements IPantalla {
 	Sprite bigGatoAzul;
 	Sprite bigGatoVerde;
 	Sprite bigGatoAmarillo;
+	
+	Sprite meta;
 
 	HashMap<Integer, Sprite> sprites;
 	int selectedSpriteId = -1;
@@ -135,6 +138,10 @@ public class Nv01 implements IPantalla {
 			tablero.putEntity(sprites.get(key).getData());
 		}
 
+		
+		// META
+		meta = new Sprite(760, 330, 150, 150, "src/Imagenes/meta.png");
+		
 		// TIEMPO
 		tiempoInicial = System.nanoTime();
 	}
@@ -174,18 +181,12 @@ public class Nv01 implements IPantalla {
 		g.setColor(Color.BLACK);
 		g.drawString("Volver (V)", 760, 820);
 
-		// GATOS
-		smallGatoVerde.pintarEnMundo(g);
-		smallGatoNaranja.pintarEnMundo(g);
-		smallGatoAzul.pintarEnMundo(g);
-
-		bigGatoLila.pintarEnMundo(g);
-		bigGatoAzul.pintarEnMundo(g);
-		bigGatoVerde.pintarEnMundo(g);
-		bigGatoAmarillo.pintarEnMundo(g);
-
-		// PÁJARO
-		pajaro.pintarEnMundo(g);
+		// SPRITES
+		for (int key : sprites.keySet()) {
+			sprites.get(key).pintarEnMundo(g);
+		}
+		
+		meta.pintarEnMundo(g);
 	}
 
 	@Override
@@ -212,9 +213,8 @@ public class Nv01 implements IPantalla {
 	@Override
 	public void pulsarTecla(KeyEvent e) {
 		if (KeyEvent.getKeyText(e.getKeyCode()).equalsIgnoreCase("v")) {
-			panelJuego.setPantalla(new PantallaInicio(panelJuego));
+			panelJuego.setPantalla(new MenuPrincipiante(panelJuego));
 		}
-
 	}
 	
 	

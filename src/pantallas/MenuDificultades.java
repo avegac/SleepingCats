@@ -20,7 +20,6 @@ public class MenuDificultades implements IPantalla{
 	PanelJuego panelJuego;
 	
 	/**FONDO**/
-	/**FONDO**/
 	private BufferedImage fondo;
 	private Image fondoEscalado;
 	
