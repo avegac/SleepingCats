@@ -26,11 +26,11 @@ public class Tablero {
 	 * porque al principio están vacías.
 	 */
 	public void fill() {
-		casillas = new Casilla[this.width][this.height];
+		casillas = new Casilla[this.height][this.width];
 		
-		for(int i = this.width-1; i >= 0; i--) {
-			for(int z = this.height-1; z >= 0; z--) {
-				casillas[i][z] = new Casilla(("x"+z+"y"+i), -1);
+		for(int i = this.height - 1; i >= 0; i--) {
+			for(int z = this.width - 1; z >= 0; z--) {
+				casillas[i][z] = new Casilla(("x"+z+"y"+i), z, i, -1);
 			}
 		}
 	}
@@ -43,28 +43,25 @@ public class Tablero {
 		int xmax = entidad.getxOrigin() + entidad.getxSize();
 		int ymax = entidad.getyOrigin() + entidad.getySize();
 		
-		for(int i = entidad.getxOrigin(); i < ymax; i++) {
+		for(int i = entidad.getxOrigin(); i < xmax; i++) {
 			for(int z = entidad.getyOrigin(); z < ymax; z++) {
-				//Control para ver por consola si se están incluyendo las entidades (bloques) correctamente en el tablero
-				System.out.println("i: "+i);
-				System.out.println("z: "+z);
-				
+//				System.out.println("i: "+i);
+//				System.out.println("z: "+z);
 				casillas[z][i].setState(entidad.getId());
 			}
 		}
-		
-		//Control para ver que el tablero se ha rellenado correctamente
-		System.out.println(Arrays.deepToString(casillas));
+
+//		System.out.println(Arrays.deepToString(casillas));
 	}
 	
 	/**
-	 * Método para eliminar un bloque del tablero
-	 * @param id identificador del bloque
+	 * Método para eliminar un bloque del tablero. Si el estado de la casilla es la id de un bloque, lo cambiamos a -1,
+	 * que es el que indica que la casilla está vacía.
+	 * @param id Identificador del bloque
 	 */
 	public void clearEntity(int id) {
 		for(int i = this.height - 1; i >= 0; i--) {
 			for(int z = this.width - 1; z >= 0; z--) {
-				//Si el estado de la casilla es la id de un bloque, lo cambiamos a -1, que es el que indica que la casilla está vacía
 				if(casillas[i][z].getState() == id) {
 					casillas[i][z].setState(-1);
 				}
@@ -72,9 +69,8 @@ public class Tablero {
 		}
 	}
 	
-	/*
-	 * Getters y setters
-	 */
+	/**GETTERS Y SETTERS**/
+	
 	public int getHeight() {
 		return height;
 	}
